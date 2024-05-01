@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kxagent"
+description = "Language modeling library by Spiral.AI"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "ksterx", email = "kostonerx@gmail.com"},
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+]
+version = "0.1.0"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+    "jupyterlab",
+]
+
+gpu = [
+    "flash-attn",
+]
+
+[tool.setuptools.packages.find]
+exclude = ["tests", "experiments", "docs", "devenvs", "apps", "playground"]
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "double"
