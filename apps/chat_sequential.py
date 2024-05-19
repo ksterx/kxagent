@@ -1,8 +1,11 @@
+from pathlib import Path
+
 import gradio as gr
 import numpy as np
 import torch
 import torchaudio.transforms as T
 import whisper
+from huggingface_hub import hf_hub_download
 from llama_cpp import Llama
 from loguru import logger
 
@@ -18,10 +21,19 @@ llm = Llama.from_pretrained(
     filename="*.gguf",
     # n_gpu_layers=1,
 )
+
+repo_id = "litagin/style_bert_vits2_jvnv"
+
+model_path = hf_hub_download(
+    repo_id, filename="jvnv-F1-jp/jvnv-F1-jp_e160_s14000.safetensors"
+)
+config_path = hf_hub_download(repo_id, filename="jvnv-F1-jp/config.json")
+style_vec_path = hf_hub_download(repo_id, filename="jvnv-F1-jp/style_vectors.npy")
+
 tts = TTSModel(
-    model_path="/Users/ksterx/Documents/Development/GitHub/Style-Bert-VITS2/model_assets/jvnv-F1-jp/jvnv-F1-jp_e160_s14000.safetensors",
-    config_path="/Users/ksterx/Documents/Development/GitHub/Style-Bert-VITS2/model_assets/jvnv-F1-jp/config.json",
-    style_vec_path="/Users/ksterx/Documents/Development/GitHub/Style-Bert-VITS2/model_assets/jvnv-F1-jp/style_vectors.npy",
+    model_path=Path(model_path),
+    config_path=Path(config_path),
+    style_vec_path=Path(style_vec_path),
     device="mps",
 )
 tts.load()
