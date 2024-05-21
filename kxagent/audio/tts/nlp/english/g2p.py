@@ -9,7 +9,6 @@ from .nlp.symbols import PUNCTUATIONS, SYMBOLS
 
 
 def g2p(text: str) -> tuple[list[str], list[int], list[int]]:
-
     ARPA = {
         "AH0",
         "S",

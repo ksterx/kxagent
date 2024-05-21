@@ -14,7 +14,6 @@ def normalize_text(text: str) -> str:
 
 
 def replace_punctuation(text: str) -> str:
-
     REPLACE_MAP = {
         "：": ",",
         "；": ",",
