@@ -16,11 +16,11 @@ class Languages(StrEnum):
     ZH = "ZH"
 
 
-# 言語ごとのデフォルトの BERT トークナイザーのパス
-DEFAULT_BERT_TOKENIZER_PATHS = {
-    Languages.JP: BASE_DIR / "bert" / "deberta-v2-large-japanese-char-wwm",
-    Languages.EN: BASE_DIR / "bert" / "deberta-v3-large",
-    Languages.ZH: BASE_DIR / "bert" / "chinese-roberta-wwm-ext-large",
+# 言語ごとのデフォルトの BERT トークナイザーのリポジトリ
+DEFAULT_BERT_TOKENIZER_REPOS = {
+    Languages.JP: "ku-nlp/deberta-v2-large-japanese-char-wwm",
+    Languages.EN: "microsoft/deberta-v3-large",
+    Languages.ZH: "hfl/chinese-roberta-wwm-ext-large",
 }
 
 # デフォルトのユーザー辞書ディレクトリ
@@ -43,4 +43,4 @@ DEFAULT_ASSIST_TEXT_WEIGHT = 1.0
 # Gradio のテーマ
 ## Built-in theme: "default", "base", "monochrome", "soft", "glass"
 ## See https://huggingface.co/spaces/gradio/theme-gallery for more themes
-GRADIO_THEME = "NoCrypt/miku"
+GRADIO_THEME = "derekzen/stardust"

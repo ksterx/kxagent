@@ -1,13 +1,9 @@
 [project]
 name = "kxagent"
-description = "Agent system by ksterx"
-readme = "README.md"
-requires-python = ">=3.10"
+version = "0.1.0"
+description = "kxagent is a hub system for AI models."
 authors = [
-    {name = "ksterx", email = "kostonerx@gmail.com"},
-]
-classifiers = [
-    "Programming Language :: Python :: 3",
+    { name = "ksterx", email = "76713276+ksterx@users.noreply.github.com" }
 ]
 dependencies = [
     "gradio>=4.36.1",
@@ -32,18 +28,6 @@ dependencies = [
     "pyworld-prebuilt>=0.3.4.1",
     "tiktoken>=0.7.0",
     "openai-whisper @ git+https://github.com/openai/whisper.git",
-]
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
-version = "0.1.0"
-description = "Add your description here"
-dependencies = [
-    "gradio>=4.36.1",
-    "numpy>=2.0.0",
-    "torch>=2.3.1",
-    "torchaudio>=2.3.1",
-    "whisper>=1.1.10",
-    "transformers>=4.41.2",
-    "loguru>=0.7.2",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"

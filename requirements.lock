@@ -11,8 +11,6 @@
 -e file:.
 aiofiles==23.2.1
     # via gradio
-<<<<<<< HEAD
-=======
 aiohttp==3.9.5
     # via datasets
     # via fsspec
@@ -20,29 +18,18 @@ aiosignal==1.3.1
     # via aiohttp
 alembic==1.13.1
     # via optuna
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 altair==5.3.0
     # via gradio
 annotated-types==0.7.0
     # via pydantic
-<<<<<<< HEAD
-=======
 antlr4-python3-runtime==4.9.3
     # via omegaconf
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 anyio==4.4.0
     # via httpx
     # via starlette
     # via watchfiles
-<<<<<<< HEAD
-attrs==23.2.0
-    # via jsonschema
-    # via referencing
-=======
 asteroid-filterbanks==0.4.0
     # via pyannote-audio
-async-timeout==4.0.3
-    # via aiohttp
 attrs==23.2.0
     # via aiohttp
     # via jsonschema
@@ -51,26 +38,10 @@ audioread==3.0.1
     # via librosa
 av==12.1.0
     # via faster-whisper
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 certifi==2024.6.2
     # via httpcore
     # via httpx
     # via requests
-<<<<<<< HEAD
-charset-normalizer==3.3.2
-    # via requests
-click==8.1.7
-    # via typer
-    # via uvicorn
-contourpy==1.2.1
-    # via matplotlib
-cycler==0.12.1
-    # via matplotlib
-dnspython==2.6.1
-    # via email-validator
-email-validator==2.1.2
-    # via fastapi
-=======
 cffi==1.16.0
     # via soundfile
 charset-normalizer==3.3.2
@@ -116,32 +87,15 @@ einops==0.8.0
     # via pyannote-audio
 email-validator==2.1.2
     # via fastapi
-exceptiongroup==1.2.1
-    # via anyio
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 fastapi==0.111.0
     # via gradio
 fastapi-cli==0.0.4
     # via fastapi
-<<<<<<< HEAD
-ffmpy==0.3.2
-    # via gradio
-filelock==3.15.1
-    # via huggingface-hub
-    # via torch
-    # via transformers
-fonttools==4.53.0
-    # via matplotlib
-fsspec==2024.6.0
-    # via gradio-client
-    # via huggingface-hub
-    # via torch
-=======
 faster-whisper==1.0.2
     # via kxagent
 ffmpy==0.3.2
     # via gradio
-filelock==3.15.1
+filelock==3.15.3
     # via datasets
     # via huggingface-hub
     # via pyannote-pipeline
@@ -163,7 +117,6 @@ fsspec==2024.5.0
     # via torch
 g2p-en==2.1.0
     # via kxagent
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 gradio==4.36.1
     # via kxagent
 gradio-client==1.0.1
@@ -180,12 +133,6 @@ httpx==0.27.0
     # via gradio
     # via gradio-client
 huggingface-hub==0.23.4
-<<<<<<< HEAD
-    # via gradio
-    # via gradio-client
-    # via tokenizers
-    # via transformers
-=======
     # via datasets
     # via faster-whisper
     # via gradio
@@ -198,16 +145,11 @@ humanfriendly==10.0
     # via coloredlogs
 hyperpyyaml==1.2.2
     # via speechbrain
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 idna==3.7
     # via anyio
     # via email-validator
     # via httpx
     # via requests
-<<<<<<< HEAD
-importlib-resources==6.4.0
-    # via gradio
-=======
     # via yarl
 importlib-metadata==7.1.0
     # via cmudict
@@ -218,14 +160,10 @@ inflect==7.2.1
     # via g2p-en
 jieba==0.42.1
     # via kxagent
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 jinja2==3.1.4
     # via altair
     # via fastapi
     # via gradio
-<<<<<<< HEAD
-    # via torch
-=======
     # via llama-cpp-python
     # via torch
 joblib==1.4.2
@@ -233,17 +171,10 @@ joblib==1.4.2
     # via nltk
     # via scikit-learn
     # via speechbrain
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 jsonschema==4.22.0
     # via altair
 jsonschema-specifications==2023.12.1
     # via jsonschema
-<<<<<<< HEAD
-kiwisolver==1.4.5
-    # via matplotlib
-loguru==0.7.2
-    # via kxagent
-=======
 julius==0.2.7
     # via torch-audiomentations
 kiwisolver==1.4.5
@@ -258,7 +189,7 @@ lightning-utilities==0.11.2
     # via lightning
     # via pytorch-lightning
     # via torchmetrics
-llama-cpp-python==0.2.78
+llama-cpp-python==0.2.79
     # via kxagent
 llvmlite==0.43.0
     # via numba
@@ -266,58 +197,11 @@ loguru==0.7.2
     # via kxagent
 mako==1.3.5
     # via alembic
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 markdown-it-py==3.0.0
     # via rich
 markupsafe==2.1.5
     # via gradio
     # via jinja2
-<<<<<<< HEAD
-matplotlib==3.9.0
-    # via gradio
-mdurl==0.1.2
-    # via markdown-it-py
-mpmath==1.3.0
-    # via sympy
-networkx==3.3
-    # via torch
-numpy==2.0.0
-    # via altair
-    # via contourpy
-    # via gradio
-    # via kxagent
-    # via matplotlib
-    # via pandas
-    # via transformers
-nvidia-cublas-cu12==12.1.3.1
-    # via nvidia-cudnn-cu12
-    # via nvidia-cusolver-cu12
-    # via torch
-nvidia-cuda-cupti-cu12==12.1.105
-    # via torch
-nvidia-cuda-nvrtc-cu12==12.1.105
-    # via torch
-nvidia-cuda-runtime-cu12==12.1.105
-    # via torch
-nvidia-cudnn-cu12==8.9.2.26
-    # via torch
-nvidia-cufft-cu12==11.0.2.54
-    # via torch
-nvidia-curand-cu12==10.3.2.106
-    # via torch
-nvidia-cusolver-cu12==11.4.5.107
-    # via torch
-nvidia-cusparse-cu12==12.1.0.106
-    # via nvidia-cusolver-cu12
-    # via torch
-nvidia-nccl-cu12==2.20.5
-    # via torch
-nvidia-nvjitlink-cu12==12.5.40
-    # via nvidia-cusolver-cu12
-    # via nvidia-cusparse-cu12
-nvidia-nvtx-cu12==12.1.105
-    # via torch
-=======
     # via mako
 matplotlib==3.9.0
     # via gradio
@@ -386,28 +270,11 @@ openai-whisper @ git+https://github.com/openai/whisper.git@ba3f3cd54b0e5b8ce1ab3
     # via kxagent
 optuna==3.6.1
     # via pyannote-pipeline
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 orjson==3.10.5
     # via fastapi
     # via gradio
 packaging==24.1
     # via altair
-<<<<<<< HEAD
-    # via gradio
-    # via gradio-client
-    # via huggingface-hub
-    # via matplotlib
-    # via transformers
-pandas==2.2.2
-    # via altair
-    # via gradio
-pillow==10.3.0
-    # via gradio
-    # via matplotlib
-pydantic==2.7.4
-    # via fastapi
-    # via gradio
-=======
     # via datasets
     # via gradio
     # via gradio-client
@@ -445,7 +312,7 @@ proces==0.1.7
 protobuf==5.27.1
     # via onnxruntime
     # via tensorboardx
-pyannote-audio==3.3.0
+pyannote-audio==3.3.1
     # via kxagent
 pyannote-core==5.0.0
     # via pyannote-audio
@@ -470,24 +337,18 @@ pydantic==2.7.4
     # via fastapi
     # via gradio
     # via kxagent
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 pydantic-core==2.18.4
     # via pydantic
 pydub==0.25.1
     # via gradio
 pygments==2.18.0
     # via rich
-<<<<<<< HEAD
-pyparsing==3.1.2
-    # via matplotlib
-=======
 pyopenjtalk-dict==0.3.4.dev2
     # via kxagent
 pyparsing==3.1.2
     # via matplotlib
 pypinyin==0.51.0
     # via kxagent
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 python-dateutil==2.9.0.post0
     # via matplotlib
     # via pandas
@@ -496,13 +357,6 @@ python-dotenv==1.0.1
 python-multipart==0.0.9
     # via fastapi
     # via gradio
-<<<<<<< HEAD
-pytz==2024.1
-    # via pandas
-pyyaml==6.0.1
-    # via gradio
-    # via huggingface-hub
-=======
 pytorch-lightning==2.3.0
     # via lightning
 pytorch-metric-learning==2.5.0
@@ -523,20 +377,12 @@ pyyaml==6.0.1
     # via pyannote-database
     # via pyannote-pipeline
     # via pytorch-lightning
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
     # via transformers
     # via uvicorn
 referencing==0.35.1
     # via jsonschema
     # via jsonschema-specifications
 regex==2024.5.15
-<<<<<<< HEAD
-    # via transformers
-requests==2.32.3
-    # via huggingface-hub
-    # via transformers
-rich==13.7.1
-=======
     # via nltk
     # via tiktoken
     # via transformers
@@ -548,39 +394,18 @@ requests==2.32.3
     # via transformers
 rich==13.7.1
     # via pyannote-audio
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
     # via typer
 rpds-py==0.18.1
     # via jsonschema
     # via referencing
-<<<<<<< HEAD
-=======
 ruamel-yaml==0.18.6
     # via hyperpyyaml
 ruamel-yaml-clib==0.2.8
     # via ruamel-yaml
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 ruff==0.4.9
     # via gradio
 safetensors==0.4.3
     # via transformers
-<<<<<<< HEAD
-semantic-version==2.10.0
-    # via gradio
-shellingham==1.5.4
-    # via typer
-six==1.16.0
-    # via python-dateutil
-    # via whisper
-sniffio==1.3.1
-    # via anyio
-    # via httpx
-starlette==0.37.2
-    # via fastapi
-sympy==1.12.1
-    # via torch
-tokenizers==0.19.1
-=======
 scikit-learn==1.5.0
     # via librosa
     # via pyannote-metrics
@@ -598,7 +423,7 @@ semver==3.0.2
     # via pyannote-audio
 sentencepiece==0.2.0
     # via speechbrain
-setuptools==70.0.0
+setuptools==70.1.0
     # via cn2an
     # via ctranslate2
     # via lightning-utilities
@@ -639,28 +464,12 @@ tiktoken==0.7.0
     # via openai-whisper
 tokenizers==0.19.1
     # via faster-whisper
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
     # via transformers
 tomlkit==0.12.0
     # via gradio
 toolz==0.12.1
     # via altair
 torch==2.3.1
-<<<<<<< HEAD
-    # via kxagent
-    # via torchaudio
-torchaudio==2.3.1
-    # via kxagent
-tqdm==4.66.4
-    # via huggingface-hub
-    # via transformers
-transformers==4.41.2
-    # via kxagent
-typer==0.12.3
-    # via fastapi-cli
-    # via gradio
-typing-extensions==4.12.2
-=======
     # via asteroid-filterbanks
     # via julius
     # via kxagent
@@ -711,20 +520,11 @@ typer==0.12.3
     # via pyannote-database
 typing-extensions==4.12.2
     # via alembic
-    # via altair
-    # via anyio
     # via asteroid-filterbanks
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
     # via fastapi
     # via gradio
     # via gradio-client
     # via huggingface-hub
-<<<<<<< HEAD
-    # via pydantic
-    # via pydantic-core
-    # via torch
-    # via typer
-=======
     # via inflect
     # via librosa
     # via lightning
@@ -738,8 +538,6 @@ typing-extensions==4.12.2
     # via torch
     # via typeguard
     # via typer
-    # via uvicorn
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 tzdata==2024.1
     # via pandas
 ujson==5.10.0
@@ -757,14 +555,9 @@ watchfiles==0.22.0
 websockets==11.0.3
     # via gradio-client
     # via uvicorn
-<<<<<<< HEAD
-whisper==1.1.10
-    # via kxagent
-=======
 xxhash==3.4.1
     # via datasets
 yarl==1.9.4
     # via aiohttp
 zipp==3.19.2
     # via importlib-metadata
->>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)

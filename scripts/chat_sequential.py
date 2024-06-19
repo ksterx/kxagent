@@ -6,11 +6,10 @@ import torch
 import torchaudio.transforms as T
 import whisper
 from huggingface_hub import hf_hub_download
+from kxagent.audio import TTSModel
 from llama_cpp import Llama
 from loguru import logger
 from transformers import AutoTokenizer
-
-from kxagent.audio import TTSModel
 
 MEMORY_LENGTH = 2
 CONTEXT_SIZE = 2048
@@ -108,7 +107,7 @@ def clear_chatbot():
     return []
 
 
-with gr.Blocks() as demo:
+with gr.Blocks(theme="derekzen/stardust") as demo:
     chatbot = gr.Chatbot(label="チャット")
     msg = gr.Textbox("", label="あなたからのメッセージ")
     clear = gr.Button("チャット履歴の消去")
