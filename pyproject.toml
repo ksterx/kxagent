@@ -1,5 +1,39 @@
 [project]
 name = "kxagent"
+description = "Agent system by ksterx"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "ksterx", email = "kostonerx@gmail.com"},
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "gradio>=4.36.1",
+    "torch>=2.3.1",
+    "torchaudio>=2.3.1",
+    "llama-cpp-python>=0.2.78",
+    "loguru>=0.7.2",
+    "pyannote-audio>=3.3.0",
+    "numpy<2.0",
+    "transformers>=4.41.2",
+    "datasets>=2.20.0",
+    "faster-whisper>=1.0.2",
+    "cmudict>=1.0.23",
+    "cn2an>=0.5.22",
+    "g2p-en>=2.1.0",
+    "jieba>=0.42.1",
+    "num2words>=0.5.13",
+    "numba>=0.60.0",
+    "pydantic>=2.7.4",
+    "pyopenjtalk-dict>=0.3.4.dev2",
+    "pypinyin>=0.51.0",
+    "pyworld-prebuilt>=0.3.4.1",
+    "tiktoken>=0.7.0",
+    "openai-whisper @ git+https://github.com/openai/whisper.git",
+]
+>>>>>>> 1739146 (chore: Add Python 3.10 support and update dependencies)
 version = "0.1.0"
 description = "Add your description here"
 dependencies = [

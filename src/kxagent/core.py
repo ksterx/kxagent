@@ -46,7 +46,7 @@ class Worker:
         if worker.status == "waiting":
             return
         else:
-
+            raise NotImplementedError
 
 
 class Interpreter(Worker):

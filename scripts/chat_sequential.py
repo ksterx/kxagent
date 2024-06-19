@@ -8,14 +8,16 @@ import whisper
 from huggingface_hub import hf_hub_download
 from llama_cpp import Llama
 from loguru import logger
+from transformers import AutoTokenizer
 
-from kxagent.voice.tts.core import TTSModel
+from kxagent.audio import TTSModel
 
 MEMORY_LENGTH = 2
 CONTEXT_SIZE = 2048
 MAX_TOKENS = 512
 
 asr = whisper.load_model("small")
+tokenizer = AutoTokenizer.from_pretrained("Spiral-AI/anonymous-7b")
 llm = Llama.from_pretrained(
     repo_id="Spiral-AI/Anonymous-7b-gguf",
     filename="*.gguf",
@@ -39,18 +41,15 @@ tts = TTSModel(
 tts.load()
 
 
-def compose_prompt(history):
-    prompt = "<|endoftext|>"
-    for uttrs in history:
-        prompt += f"USER: {uttrs[0]}\n"
-        if uttrs[1] is not None:
-            prompt += f"ASSISTANT: {uttrs[1]}<|endoftext|>\n"
+def compose_prompt(history) -> str:
+    messages = []
+    for user_msg, assistant_msg in history:
+        if user_msg:
+            messages.append({"role": "user", "content": user_msg})
+        if assistant_msg:
+            messages.append({"role": "assistant", "content": assistant_msg})
 
-    prompt += "ASSISTANT: "
-    logger.debug(f"\nPrompt: {prompt}")
-
-    return prompt
-
+    return tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
 
 def text2speech(history):
     text = history[-1][1]
@@ -87,7 +86,6 @@ def user(user_message, history):
 def bot(history):
     # プロンプトを作成
     prompt = compose_prompt(history)
-    print(prompt)
 
     # 推論
     streamer = llm.create_completion(prompt, max_tokens=MAX_TOKENS, stream=True)
@@ -105,6 +103,9 @@ def bot(history):
 
 def clear_audio_in():
     return None
+
+def clear_chatbot():
+    return []
 
 
 with gr.Blocks() as demo:
@@ -127,6 +128,6 @@ with gr.Blocks() as demo:
     )
 
     # チャット履歴の消去
-    clear.click(lambda: None, None, chatbot, queue=False)
+    clear.click(clear_chatbot, outputs=[chatbot], queue=False)
 
 demo.queue().launch()
