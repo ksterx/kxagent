@@ -7,9 +7,9 @@ from torch.nn import Conv1d
 from torch.nn import functional as F
 from torch.nn.utils import remove_weight_norm, weight_norm
 
-from . import commons
+from .nets import commons
 from .attentions import Encoder
-from .transforms import piecewise_rational_quadratic_transform
+from ..transforms import piecewise_rational_quadratic_transform
 
 LRELU_SLOPE = 0.1
 

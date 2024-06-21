@@ -69,9 +69,6 @@ def load_model(
 
     # pretrained_model_name_or_path が指定されていない場合はデフォルトのパスを利用
     if pretrained_model_name_or_path is None:
-        assert DEFAULT_BERT_TOKENIZER_REPOS[
-            language
-        ].exists(), f"The default {language} BERT model does not exist on the file system. Please specify the path to the pre-trained model."
         pretrained_model_name_or_path = str(DEFAULT_BERT_TOKENIZER_REPOS[language])
 
     # BERT モデルをロードし、辞書に格納して返す
@@ -130,9 +127,6 @@ def load_tokenizer(
 
     # pretrained_model_name_or_path が指定されていない場合はデフォルトのパスを利用
     if pretrained_model_name_or_path is None:
-        assert DEFAULT_BERT_TOKENIZER_REPOS[
-            language
-        ].exists(), f"The default {language} BERT tokenizer does not exist on the file system. Please specify the path to the pre-trained model."
         pretrained_model_name_or_path = str(DEFAULT_BERT_TOKENIZER_REPOS[language])
 
     # BERT トークナイザーをロードし、辞書に格納して返す

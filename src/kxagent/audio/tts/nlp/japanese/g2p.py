@@ -37,14 +37,14 @@ def g2p(
     # アクセント割当をしなおすことによって punctuation を含めた音素とアクセントのリストを作る。
 
     # punctuation がすべて消えた、音素とアクセントのタプルのリスト（「ん」は「N」）
-    phone_tone_list_wo_punct = __g2phone_tone_wo_punct(norm_text)
+    phone_tone_list_wo_punct = _g2phone_tone_wo_punct(norm_text)
 
     # sep_text: 単語単位の単語のリスト、読めない文字があったら raise_yomi_error なら例外、そうでないなら読めない文字が消えて返ってくる
     # sep_kata: 単語単位の単語のカタカナ読みのリスト
     sep_text, sep_kata = text_to_sep_kata(norm_text, raise_yomi_error=raise_yomi_error)
 
     # sep_phonemes: 各単語ごとの音素のリストのリスト
-    sep_phonemes = __handle_long([__kata_to_phoneme_list(i) for i in sep_kata])
+    sep_phonemes = _handle_long([__kata_to_phoneme_list(i) for i in sep_kata])
 
     # phone_w_punct: sep_phonemes を結合した、punctuation を元のまま保持した音素列
     phone_w_punct: list[str] = []
@@ -52,7 +52,7 @@ def g2p(
         phone_w_punct += i
 
     # punctuation 無しのアクセント情報を使って、punctuation を含めたアクセント情報を作る
-    phone_tone_list = __align_tones(phone_w_punct, phone_tone_list_wo_punct)
+    phone_tone_list = _align_tones(phone_w_punct, phone_tone_list_wo_punct)
     # logger.debug(f"phone_tone_list:\n{phone_tone_list}")
 
     # word2ph は厳密な解答は不可能なので（「今日」「眼鏡」等の熟字訓が存在）、
@@ -73,7 +73,7 @@ def g2p(
     for token, phoneme in zip(sep_tokenized, sep_phonemes):
         phone_len = len(phoneme)
         word_len = len(token)
-        word2ph += __distribute_phone(phone_len, word_len)
+        word2ph += _distribute_phone(phone_len, word_len)
 
     # 最初と最後に `_` 記号を追加、アクセントは 0（低）、word2ph もそれに合わせて追加
     phone_tone_list = [("_", 0)] + phone_tone_list + [("_", 0)]
@@ -154,7 +154,7 @@ def text_to_sep_kata(
     return sep_text, sep_kata
 
 
-def __g2phone_tone_wo_punct(text: str) -> list[tuple[str, int]]:
+def _g2phone_tone_wo_punct(text: str) -> list[tuple[str, int]]:
     """
     テキストに対して、音素とアクセント（0か1）のペアのリストを返す。
     ただし「!」「.」「?」等の非音素記号 (punctuation) は全て消える（ポーズ記号も残さない）。
@@ -170,7 +170,7 @@ def __g2phone_tone_wo_punct(text: str) -> list[tuple[str, int]]:
         list[tuple[str, int]]: 音素とアクセントのペアのリスト
     """
 
-    prosodies = __pyopenjtalk_g2p_prosody(text, drop_unvoiced_vowels=True)
+    prosodies = _pyopenjtalk_g2p_prosody(text, drop_unvoiced_vowels=True)
     # logger.debug(f"prosodies: {prosodies}")
     result: list[tuple[str, int]] = []
     current_phrase: list[tuple[str, int]] = []
@@ -185,7 +185,7 @@ def __g2phone_tone_wo_punct(text: str) -> list[tuple[str, int]]:
         # アクセント句の終わりに来る記号
         elif letter in ("$", "?", "_", "#"):
             # 保持しているフレーズを、アクセント数値を 0-1 に修正し結果に追加
-            result.extend(__fix_phone_tone(current_phrase))
+            result.extend(_fix_phone_tone(current_phrase))
             # 末尾に来る終了記号、無視（文中の疑問文は `_` になる）
             if letter in ("$", "?"):
                 assert i == len(prosodies) - 1, f"Unexpected {letter}"
@@ -211,9 +211,7 @@ def __g2phone_tone_wo_punct(text: str) -> list[tuple[str, int]]:
     return result
 
 
-def __pyopenjtalk_g2p_prosody(
-    text: str, drop_unvoiced_vowels: bool = True
-) -> list[str]:
+def _pyopenjtalk_g2p_prosody(text: str, drop_unvoiced_vowels: bool = True) -> list[str]:
     """
     ESPnet の実装から引用、変更点無し。「ん」は「N」なことに注意。
     ref: https://github.com/espnet/espnet/blob/master/espnet2/text/phoneme_tokenizer.py
@@ -300,7 +298,7 @@ def __pyopenjtalk_g2p_prosody(
     return phones
 
 
-def __fix_phone_tone(phone_tone_list: list[tuple[str, int]]) -> list[tuple[str, int]]:
+def _fix_phone_tone(phone_tone_list: list[tuple[str, int]]) -> list[tuple[str, int]]:
     """
     `phone_tone_list` の tone（アクセントの値）を 0 か 1 の範囲に修正する。
     例: [(a, 0), (i, -1), (u, -1)] → [(a, 1), (i, 0), (u, 0)]
@@ -329,7 +327,7 @@ def __fix_phone_tone(phone_tone_list: list[tuple[str, int]]) -> list[tuple[str, 
         raise ValueError(f"Unexpected tone values: {tone_values}")
 
 
-def __handle_long(sep_phonemes: list[list[str]]) -> list[list[str]]:
+def _handle_long(sep_phonemes: list[list[str]]) -> list[list[str]]:
     """
     フレーズごとに分かれた音素（長音記号がそのまま）のリストのリスト `sep_phonemes` を受け取り、
     その長音記号を処理して、音素のリストのリストを返す。
@@ -414,7 +412,7 @@ def __kata_to_phoneme_list(text: str) -> list[str]:
     return spaced_phonemes.strip().split(" ")
 
 
-def __align_tones(
+def _align_tones(
     phones_with_punct: list[str], phone_tone_list: list[tuple[str, int]]
 ) -> list[tuple[str, int]]:
     """
@@ -459,7 +457,7 @@ def __align_tones(
     return result
 
 
-def __distribute_phone(n_phone: int, n_word: int) -> list[int]:
+def _distribute_phone(n_phone: int, n_word: int) -> list[int]:
     """
     左から右に 1 ずつ振り分け、次にまた左から右に1ずつ増やし、というふうに、
     音素の数 `n_phone` を単語の数 `n_word` に分配する。

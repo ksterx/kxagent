@@ -24,10 +24,9 @@ from .constants import (
 )
 from .logging import logger
 from .models.hyper_parameters import HyperParameters
-from .models.infer import get_net_g, infer
-from .models.models_jp_extra import SynthesizerTrn as SynthesizerTrnJPExtra
-from .models.net import SynthesizerTrn
-from .nlp import bert_models
+from .models.inference import get_net_g, infer
+from .models.nets.models_jp_extra import SynthesizerTrn as SynthesizerTrnJPExtra
+from .models.nets.net import SynthesizerTrn
 from .voice import adjust_voice
 
 
@@ -71,11 +70,11 @@ class TTSModel:
                 f"Number of styles ({num_styles}) does not match the number of style2id ({len(self.style2id)})"
             )
 
-        self.__style_vector_inference: Optional[pyannote.audio.Inference] = None
-        self.__style_vectors: NDArray[Any] = np.load(self.style_vec_path)
-        if self.__style_vectors.shape[0] != num_styles:
+        self._style_vector_inference: Optional[pyannote.audio.Inference] = None
+        self._style_vectors: NDArray[Any] = np.load(self.style_vec_path)
+        if self._style_vectors.shape[0] != num_styles:
             raise ValueError(
-                f"The number of styles ({num_styles}) does not match the number of style vectors ({self.__style_vectors.shape[0]})"
+                f"The number of styles ({num_styles}) does not match the number of style vectors ({self._style_vectors.shape[0]})"
             )
 
         self.__net_g: Union[SynthesizerTrn, SynthesizerTrnJPExtra, None] = None
@@ -91,7 +90,7 @@ class TTSModel:
             hps=self.hyper_parameters,
         )
 
-    def __get_style_vector(self, style_id: int, weight: float = 1.0) -> NDArray[Any]:
+    def _get_style_vector(self, style_id: int, weight: float = 1.0) -> NDArray[Any]:
         """
         スタイルベクトルを取得する。
 
@@ -102,12 +101,12 @@ class TTSModel:
         Returns:
             NDArray[Any]: スタイルベクトル
         """
-        mean = self.__style_vectors[0]
-        style_vec = self.__style_vectors[style_id]
+        mean = self._style_vectors[0]
+        style_vec = self._style_vectors[style_id]
         style_vec = mean + (style_vec - mean) * weight
         return style_vec
 
-    def __get_style_vector_from_audio(
+    def _get_style_vector_from_audio(
         self, audio_path: str, weight: float = 1.0
     ) -> NDArray[Any]:
         """
@@ -121,18 +120,18 @@ class TTSModel:
         """
 
         # スタイルベクトルを取得するための推論モデルを初期化
-        if self.__style_vector_inference is None:
-            self.__style_vector_inference = pyannote.audio.Inference(
+        if self._style_vector_inference is None:
+            self._style_vector_inference = pyannote.audio.Inference(
                 model=pyannote.audio.Model.from_pretrained(
                     "pyannote/wespeaker-voxceleb-resnet34-LM"
                 ),
                 window="whole",
             )
-            self.__style_vector_inference.to(torch.device(self.device))
+            self._style_vector_inference.to(torch.device(self.device))
 
         # 音声からスタイルベクトルを推論
-        xvec = self.__style_vector_inference(audio_path)
-        mean = self.__style_vectors[0]
+        xvec = self._style_vector_inference(audio_path)
+        mean = self._style_vectors[0]
         xvec = mean + (xvec - mean) * weight
         return xvec
 
@@ -199,9 +198,9 @@ class TTSModel:
         assert self.__net_g is not None
         if reference_audio_path is None:
             style_id = self.style2id[style]
-            style_vector = self.__get_style_vector(style_id, style_weight)
+            style_vector = self._get_style_vector(style_id, style_weight)
         else:
-            style_vector = self.__get_style_vector_from_audio(
+            style_vector = self._get_style_vector_from_audio(
                 reference_audio_path, style_weight
             )
         if not line_split:
