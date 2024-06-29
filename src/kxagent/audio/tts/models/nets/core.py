@@ -7,7 +7,7 @@ from torch.nn import Conv1d, Conv2d, ConvTranspose1d
 from torch.nn import functional as F
 from torch.nn.utils import remove_weight_norm, spectral_norm, weight_norm
 
-from . import attentions, commons, modules, monotonic_alignment
+from . import attentions, modules, monotonic_alignment, utils
 
 from ...nlp.symbols import NUM_LANGUAGES, NUM_TONES, SYMBOLS
 
@@ -419,7 +419,7 @@ class TextEncoder(nn.Module):
             + style_emb
         ) * math.sqrt(self.hidden_channels)  # [b, t, h]
         x = torch.transpose(x, 1, -1)  # [b, h, t]
-        x_mask = torch.unsqueeze(commons.sequence_mask(x_lengths, x.size(2)), 1).to(
+        x_mask = torch.unsqueeze(utils.sequence_mask(x_lengths, x.size(2)), 1).to(
             x.dtype
         )
 
@@ -517,7 +517,7 @@ class PosteriorEncoder(nn.Module):
         x_lengths: torch.Tensor,
         g: Optional[torch.Tensor] = None,
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
-        x_mask = torch.unsqueeze(commons.sequence_mask(x_lengths, x.size(2)), 1).to(
+        x_mask = torch.unsqueeze(utils.sequence_mask(x_lengths, x.size(2)), 1).to(
             x.dtype
         )
         x = self.pre(x) * x_mask
@@ -573,7 +573,7 @@ class Generator(torch.nn.Module):
 
         assert ch is not None
         self.conv_post = Conv1d(ch, 1, 7, 1, padding=3, bias=False)
-        self.ups.apply(commons.init_weights)
+        self.ups.apply(utils.init_weights)
 
         if gin_channels != 0:
             self.cond = nn.Conv1d(gin_channels, upsample_initial_channel, 1)
@@ -630,7 +630,7 @@ class DiscriminatorP(torch.nn.Module):
                         32,
                         (kernel_size, 1),
                         (stride, 1),
-                        padding=(commons.get_padding(kernel_size, 1), 0),
+                        padding=(utils.get_padding(kernel_size, 1), 0),
                     )
                 ),
                 norm_f(
@@ -639,7 +639,7 @@ class DiscriminatorP(torch.nn.Module):
                         128,
                         (kernel_size, 1),
                         (stride, 1),
-                        padding=(commons.get_padding(kernel_size, 1), 0),
+                        padding=(utils.get_padding(kernel_size, 1), 0),
                     )
                 ),
                 norm_f(
@@ -648,7 +648,7 @@ class DiscriminatorP(torch.nn.Module):
                         512,
                         (kernel_size, 1),
                         (stride, 1),
-                        padding=(commons.get_padding(kernel_size, 1), 0),
+                        padding=(utils.get_padding(kernel_size, 1), 0),
                     )
                 ),
                 norm_f(
@@ -657,7 +657,7 @@ class DiscriminatorP(torch.nn.Module):
                         1024,
                         (kernel_size, 1),
                         (stride, 1),
-                        padding=(commons.get_padding(kernel_size, 1), 0),
+                        padding=(utils.get_padding(kernel_size, 1), 0),
                     )
                 ),
                 norm_f(
@@ -666,7 +666,7 @@ class DiscriminatorP(torch.nn.Module):
                         1024,
                         (kernel_size, 1),
                         1,
-                        padding=(commons.get_padding(kernel_size, 1), 0),
+                        padding=(utils.get_padding(kernel_size, 1), 0),
                     )
                 ),
             ]
@@ -1031,9 +1031,7 @@ class SynthesizerTrn(nn.Module):
         m_p = torch.matmul(attn.squeeze(1), m_p.transpose(1, 2)).transpose(1, 2)
         logs_p = torch.matmul(attn.squeeze(1), logs_p.transpose(1, 2)).transpose(1, 2)
 
-        z_slice, ids_slice = commons.rand_slice_segments(
-            z, y_lengths, self.segment_size
-        )
+        z_slice, ids_slice = utils.rand_slice_segments(z, y_lengths, self.segment_size)
         o = self.dec(z_slice, g=g)
         return (
             o,
@@ -1080,11 +1078,11 @@ class SynthesizerTrn(nn.Module):
         w = torch.exp(logw) * x_mask * length_scale
         w_ceil = torch.ceil(w)
         y_lengths = torch.clamp_min(torch.sum(w_ceil, [1, 2]), 1).long()
-        y_mask = torch.unsqueeze(commons.sequence_mask(y_lengths, None), 1).to(
+        y_mask = torch.unsqueeze(utils.sequence_mask(y_lengths, None), 1).to(
             x_mask.dtype
         )
         attn_mask = torch.unsqueeze(x_mask, 2) * torch.unsqueeze(y_mask, -1)
-        attn = commons.generate_path(w_ceil, attn_mask)
+        attn = utils.generate_path(w_ceil, attn_mask)
 
         m_p = torch.matmul(attn.squeeze(1), m_p.transpose(1, 2)).transpose(
             1, 2

@@ -26,7 +26,7 @@ from .logging import logger
 from .models.hyper_parameters import HyperParameters
 from .models.inference import get_net_g, infer
 from .models.nets.models_jp_extra import SynthesizerTrn as SynthesizerTrnJPExtra
-from .models.nets.net import SynthesizerTrn
+from .models.nets.core import SynthesizerTrn
 from .voice import adjust_voice
 
 

@@ -7,7 +7,7 @@ from torch.nn import Conv1d
 from torch.nn import functional as F
 from torch.nn.utils import remove_weight_norm, weight_norm
 
-from .nets import commons
+from . import utils
 from .attentions import Encoder
 from ..transforms import piecewise_rational_quadratic_transform
 
@@ -208,7 +208,7 @@ class WN(torch.nn.Module):
             else:
                 g_l = torch.zeros_like(x_in)
 
-            acts = commons.fused_add_tanh_sigmoid_multiply(x_in, g_l, n_channels_tensor)
+            acts = utils.fused_add_tanh_sigmoid_multiply(x_in, g_l, n_channels_tensor)
             acts = self.drop(acts)
 
             res_skip_acts = self.res_skip_layers[i](acts)
@@ -246,7 +246,7 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=dilation[0],
-                        padding=commons.get_padding(kernel_size, dilation[0]),
+                        padding=utils.get_padding(kernel_size, dilation[0]),
                     )
                 ),
                 weight_norm(
@@ -256,7 +256,7 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=dilation[1],
-                        padding=commons.get_padding(kernel_size, dilation[1]),
+                        padding=utils.get_padding(kernel_size, dilation[1]),
                     )
                 ),
                 weight_norm(
@@ -266,12 +266,12 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=dilation[2],
-                        padding=commons.get_padding(kernel_size, dilation[2]),
+                        padding=utils.get_padding(kernel_size, dilation[2]),
                     )
                 ),
             ]
         )
-        self.convs1.apply(commons.init_weights)
+        self.convs1.apply(utils.init_weights)
 
         self.convs2 = nn.ModuleList(
             [
@@ -282,7 +282,7 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=1,
-                        padding=commons.get_padding(kernel_size, 1),
+                        padding=utils.get_padding(kernel_size, 1),
                     )
                 ),
                 weight_norm(
@@ -292,7 +292,7 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=1,
-                        padding=commons.get_padding(kernel_size, 1),
+                        padding=utils.get_padding(kernel_size, 1),
                     )
                 ),
                 weight_norm(
@@ -302,12 +302,12 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=1,
-                        padding=commons.get_padding(kernel_size, 1),
+                        padding=utils.get_padding(kernel_size, 1),
                     )
                 ),
             ]
         )
-        self.convs2.apply(commons.init_weights)
+        self.convs2.apply(utils.init_weights)
 
     def forward(
         self, x: torch.Tensor, x_mask: Optional[torch.Tensor] = None
@@ -347,7 +347,7 @@ class ResBlock2(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=dilation[0],
-                        padding=commons.get_padding(kernel_size, dilation[0]),
+                        padding=utils.get_padding(kernel_size, dilation[0]),
                     )
                 ),
                 weight_norm(
@@ -357,12 +357,12 @@ class ResBlock2(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=dilation[1],
-                        padding=commons.get_padding(kernel_size, dilation[1]),
+                        padding=utils.get_padding(kernel_size, dilation[1]),
                     )
                 ),
             ]
         )
-        self.convs.apply(commons.init_weights)
+        self.convs.apply(utils.init_weights)
 
     def forward(
         self, x: torch.Tensor, x_mask: Optional[torch.Tensor] = None

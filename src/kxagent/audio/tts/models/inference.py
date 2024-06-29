@@ -7,10 +7,10 @@ from ..constants import Languages
 from ..logging import logger
 from ..nlp import clean_text, cleaned_text_to_sequence, extract_bert_feature
 from ..nlp.symbols import SYMBOLS
-from .nets import commons
+from .nets import utils
 from .hyper_parameters import HyperParameters
 from .nets.models_jp_extra import SynthesizerTrn as SynthesizerTrnJPExtra
-from .nets.net import SynthesizerTrn
+from .nets.core import SynthesizerTrn
 from .utils.checkpoints import load_checkpoint
 from .utils.safetensors import load_safetensors
 
@@ -115,9 +115,9 @@ def get_text(
     phone, tone, language = cleaned_text_to_sequence(phone, tone, language_str)
 
     if hps.data.add_blank:
-        phone = commons.intersperse(phone, 0)
-        tone = commons.intersperse(tone, 0)
-        language = commons.intersperse(language, 0)
+        phone = utils.intersperse(phone, 0)
+        tone = utils.intersperse(tone, 0)
+        language = utils.intersperse(language, 0)
         for i in range(len(word2ph)):
             word2ph[i] = word2ph[i] * 2
         word2ph[0] += 1
