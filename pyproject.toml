@@ -28,6 +28,10 @@ dependencies = [
     "pyworld-prebuilt>=0.3.4.1",
     "tiktoken>=0.7.0",
     "openai-whisper @ git+https://github.com/openai/whisper.git",
+    "huggingface-hub[hf_transfer]>=0.23.4",
+    "ruff>=0.5.0",
+    "langchain>=0.2.6",
+    "langchain-community>=0.2.6",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"

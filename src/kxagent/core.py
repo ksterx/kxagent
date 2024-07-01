@@ -1,5 +1,4 @@
 import uuid
-from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -41,7 +40,6 @@ class Worker:
         # process data
         self.send(data)
 
-
     def send(self, worker):
         if worker.status == "waiting":
             return
@@ -59,7 +57,6 @@ class Interpreter(Worker):
 
     def read(self):
         return self.data
-
 
 
 class Actor(Worker):
@@ -136,7 +133,9 @@ class Graph:
 
     def add_agent(self, agent, connections: list[Connection] | None = None):
         if not connections:
-            raise ValueError("Any connection provided. Agent must be connected to at least one other agent.")
+            raise ValueError(
+                "Any connection provided. Agent must be connected to at least one other agent."
+            )
 
         self.agents.append(agent)
         self.matrix = np.zeros((len(self.agents), len(self.agents)))
@@ -144,7 +143,6 @@ class Graph:
             if not c.has_agent(agent):
                 raise ValueError("Agent not in connection")
             self.update(c.agent_from, c.agent_to)
-
 
     def update(self, agent_from: Agent, agent_to: Agent):
         self.matrix[agent_from.idx, agent_to.idx] = 1
