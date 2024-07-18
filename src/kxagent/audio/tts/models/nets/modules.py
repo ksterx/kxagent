@@ -7,9 +7,14 @@ from torch.nn import Conv1d
 from torch.nn import functional as F
 from torch.nn.utils import remove_weight_norm, weight_norm
 
+<<<<<<< HEAD
 from . import utils
 from .attentions import Encoder
+=======
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
 from ..transforms import piecewise_rational_quadratic_transform
+from . import net
+from .attentions import Encoder
 
 LRELU_SLOPE = 0.1
 
@@ -208,7 +213,11 @@ class WN(torch.nn.Module):
             else:
                 g_l = torch.zeros_like(x_in)
 
+<<<<<<< HEAD
             acts = utils.fused_add_tanh_sigmoid_multiply(x_in, g_l, n_channels_tensor)
+=======
+            acts = net.commons.fused_add_tanh_sigmoid_multiply(x_in, g_l, n_channels_tensor)
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
             acts = self.drop(acts)
 
             res_skip_acts = self.res_skip_layers[i](acts)
@@ -246,7 +255,11 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=dilation[0],
+<<<<<<< HEAD
                         padding=utils.get_padding(kernel_size, dilation[0]),
+=======
+                        padding=net.commons.get_padding(kernel_size, dilation[0]),
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
                     )
                 ),
                 weight_norm(
@@ -256,7 +269,11 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=dilation[1],
+<<<<<<< HEAD
                         padding=utils.get_padding(kernel_size, dilation[1]),
+=======
+                        padding=net.commons.get_padding(kernel_size, dilation[1]),
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
                     )
                 ),
                 weight_norm(
@@ -266,12 +283,20 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=dilation[2],
+<<<<<<< HEAD
                         padding=utils.get_padding(kernel_size, dilation[2]),
+=======
+                        padding=net.commons.get_padding(kernel_size, dilation[2]),
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
                     )
                 ),
             ]
         )
+<<<<<<< HEAD
         self.convs1.apply(utils.init_weights)
+=======
+        self.convs1.apply(net.commons.init_weights)
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
 
         self.convs2 = nn.ModuleList(
             [
@@ -282,7 +307,11 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=1,
+<<<<<<< HEAD
                         padding=utils.get_padding(kernel_size, 1),
+=======
+                        padding=net.commons.get_padding(kernel_size, 1),
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
                     )
                 ),
                 weight_norm(
@@ -292,7 +321,11 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=1,
+<<<<<<< HEAD
                         padding=utils.get_padding(kernel_size, 1),
+=======
+                        padding=net.commons.get_padding(kernel_size, 1),
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
                     )
                 ),
                 weight_norm(
@@ -302,12 +335,20 @@ class ResBlock1(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=1,
+<<<<<<< HEAD
                         padding=utils.get_padding(kernel_size, 1),
+=======
+                        padding=net.commons.get_padding(kernel_size, 1),
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
                     )
                 ),
             ]
         )
+<<<<<<< HEAD
         self.convs2.apply(utils.init_weights)
+=======
+        self.convs2.apply(net.commons.init_weights)
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
 
     def forward(
         self, x: torch.Tensor, x_mask: Optional[torch.Tensor] = None
@@ -347,7 +388,11 @@ class ResBlock2(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=dilation[0],
+<<<<<<< HEAD
                         padding=utils.get_padding(kernel_size, dilation[0]),
+=======
+                        padding=net.commons.get_padding(kernel_size, dilation[0]),
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
                     )
                 ),
                 weight_norm(
@@ -357,12 +402,20 @@ class ResBlock2(torch.nn.Module):
                         kernel_size,
                         1,
                         dilation=dilation[1],
+<<<<<<< HEAD
                         padding=utils.get_padding(kernel_size, dilation[1]),
+=======
+                        padding=net.commons.get_padding(kernel_size, dilation[1]),
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
                     )
                 ),
             ]
         )
+<<<<<<< HEAD
         self.convs.apply(utils.init_weights)
+=======
+        self.convs.apply(net.commons.init_weights)
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
 
     def forward(
         self, x: torch.Tensor, x_mask: Optional[torch.Tensor] = None

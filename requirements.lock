@@ -28,10 +28,23 @@ antlr4-python3-runtime==4.9.3
     # via omegaconf
 anyio==4.4.0
     # via httpx
+    # via jupyter-server
     # via starlette
     # via watchfiles
+appnope==0.1.4
+    # via ipykernel
+argon2-cffi==23.1.0
+    # via jupyter-server
+argon2-cffi-bindings==21.2.0
+    # via argon2-cffi
+arrow==1.3.0
+    # via isoduration
 asteroid-filterbanks==0.4.0
     # via pyannote-audio
+asttokens==2.4.1
+    # via stack-data
+async-lru==2.0.4
+    # via jupyterlab
 attrs==23.2.0
     # via aiohttp
     # via jsonschema
@@ -40,11 +53,18 @@ audioread==3.0.1
     # via librosa
 av==12.1.0
     # via faster-whisper
+babel==2.15.0
+    # via jupyterlab-server
+beautifulsoup4==4.12.3
+    # via nbconvert
+bleach==6.1.0
+    # via nbconvert
 certifi==2024.6.2
     # via httpcore
     # via httpx
     # via requests
 cffi==1.16.0
+    # via argon2-cffi-bindings
     # via soundfile
 charset-normalizer==3.3.2
     # via requests
@@ -60,6 +80,8 @@ coloredlogs==15.0.1
     # via onnxruntime
 colorlog==6.8.2
     # via optuna
+comm==0.2.2
+    # via ipykernel
 contourpy==1.2.1
     # via matplotlib
 ctranslate2==4.3.1
@@ -72,8 +94,13 @@ dataclasses-json==0.6.7
     # via langchain-community
 datasets==2.20.0
     # via kxagent
+debugpy==1.8.2
+    # via ipykernel
 decorator==5.1.1
+    # via ipython
     # via librosa
+defusedxml==0.7.1
+    # via nbconvert
 dill==0.3.8
     # via datasets
     # via multiprocess
@@ -91,12 +118,16 @@ einops==0.8.0
     # via pyannote-audio
 email-validator==2.1.2
     # via fastapi
+executing==2.0.1
+    # via stack-data
 fastapi==0.111.0
     # via gradio
 fastapi-cli==0.0.4
     # via fastapi
 faster-whisper==1.0.2
     # via kxagent
+fastjsonschema==2.20.0
+    # via nbformat
 ffmpy==0.3.2
     # via gradio
 filelock==3.15.3
@@ -109,6 +140,8 @@ flatbuffers==24.3.25
     # via onnxruntime
 fonttools==4.53.0
     # via matplotlib
+fqdn==1.5.1
+    # via jsonschema
 frozenlist==1.4.1
     # via aiohttp
     # via aiosignal
@@ -138,6 +171,7 @@ httpx==0.27.0
     # via fastapi
     # via gradio
     # via gradio-client
+    # via jupyterlab
 huggingface-hub==0.23.4
     # via datasets
     # via faster-whisper
@@ -156,6 +190,7 @@ idna==3.7
     # via anyio
     # via email-validator
     # via httpx
+    # via jsonschema
     # via requests
     # via yarl
 importlib-metadata==7.1.0
@@ -165,29 +200,80 @@ importlib-resources==6.4.0
     # via gradio
 inflect==7.2.1
     # via g2p-en
+ipykernel==6.29.4
+    # via jupyterlab
+ipython==8.25.0
+    # via ipykernel
+isoduration==20.11.0
+    # via jsonschema
+jedi==0.19.1
+    # via ipython
 jieba==0.42.1
     # via kxagent
 jinja2==3.1.4
     # via altair
     # via fastapi
     # via gradio
+    # via jupyter-server
+    # via jupyterlab
+    # via jupyterlab-server
     # via llama-cpp-python
+    # via nbconvert
     # via torch
 joblib==1.4.2
     # via librosa
     # via nltk
     # via scikit-learn
     # via speechbrain
+<<<<<<< HEAD
 jsonpatch==1.33
     # via langchain-core
 jsonpointer==3.0.0
     # via jsonpatch
+=======
+json5==0.9.25
+    # via jupyterlab-server
+jsonpointer==3.0.0
+    # via jsonschema
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
 jsonschema==4.22.0
     # via altair
+    # via jupyter-events
+    # via jupyterlab-server
+    # via nbformat
 jsonschema-specifications==2023.12.1
     # via jsonschema
 julius==0.2.7
     # via torch-audiomentations
+jupyter-client==8.6.2
+    # via ipykernel
+    # via jupyter-server
+    # via nbclient
+jupyter-core==5.7.2
+    # via ipykernel
+    # via jupyter-client
+    # via jupyter-server
+    # via jupyterlab
+    # via nbclient
+    # via nbconvert
+    # via nbformat
+jupyter-events==0.10.0
+    # via jupyter-server
+jupyter-lsp==2.2.5
+    # via jupyterlab
+jupyter-server==2.14.1
+    # via jupyter-lsp
+    # via jupyterlab
+    # via jupyterlab-server
+    # via notebook-shim
+jupyter-server-terminals==0.5.3
+    # via jupyter-server
+jupyterlab==4.2.2
+    # via kxagent
+jupyterlab-pygments==0.3.0
+    # via nbconvert
+jupyterlab-server==2.27.2
+    # via jupyterlab
 kiwisolver==1.4.5
     # via matplotlib
 langchain==0.2.6
@@ -229,13 +315,22 @@ markupsafe==2.1.5
     # via gradio
     # via jinja2
     # via mako
+<<<<<<< HEAD
 marshmallow==3.21.3
     # via dataclasses-json
+=======
+    # via nbconvert
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
 matplotlib==3.9.0
     # via gradio
     # via pyannote-metrics
+matplotlib-inline==0.1.7
+    # via ipykernel
+    # via ipython
 mdurl==0.1.2
     # via markdown-it-py
+mistune==3.0.2
+    # via nbconvert
 more-itertools==10.3.0
     # via inflect
     # via openai-whisper
@@ -248,12 +343,27 @@ multidict==6.0.5
     # via yarl
 multiprocess==0.70.16
     # via datasets
+<<<<<<< HEAD
 mypy-extensions==1.0.0
     # via typing-inspect
+=======
+nbclient==0.10.0
+    # via nbconvert
+nbconvert==7.16.4
+    # via jupyter-server
+nbformat==5.10.4
+    # via jupyter-server
+    # via nbclient
+    # via nbconvert
+nest-asyncio==1.6.0
+    # via ipykernel
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
 networkx==3.3
     # via torch
 nltk==3.8.1
     # via g2p-en
+notebook-shim==0.2.4
+    # via jupyterlab
 num2words==0.5.13
     # via kxagent
 numba==0.60.0
@@ -305,19 +415,32 @@ optuna==3.6.1
 orjson==3.10.5
     # via fastapi
     # via gradio
+<<<<<<< HEAD
     # via langsmith
+=======
+overrides==7.7.0
+    # via jupyter-server
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
 packaging==24.1
     # via altair
     # via datasets
     # via gradio
     # via gradio-client
     # via huggingface-hub
+<<<<<<< HEAD
     # via langchain-core
+=======
+    # via ipykernel
+    # via jupyter-server
+    # via jupyterlab
+    # via jupyterlab-server
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
     # via lazy-loader
     # via lightning
     # via lightning-utilities
     # via marshmallow
     # via matplotlib
+    # via nbconvert
     # via onnxruntime
     # via optuna
     # via pooch
@@ -333,10 +456,17 @@ pandas==2.2.2
     # via gradio
     # via pyannote-database
     # via pyannote-metrics
+pandocfilters==1.5.1
+    # via nbconvert
+parso==0.8.4
+    # via jedi
+pexpect==4.9.0
+    # via ipython
 pillow==10.3.0
     # via gradio
     # via matplotlib
 platformdirs==4.2.2
+    # via jupyter-core
     # via pooch
 pooch==1.8.2
     # via librosa
@@ -344,9 +474,20 @@ primepy==1.3
     # via torch-pitch-shift
 proces==0.1.7
     # via cn2an
+prometheus-client==0.20.0
+    # via jupyter-server
+prompt-toolkit==3.0.47
+    # via ipython
 protobuf==5.27.1
     # via onnxruntime
     # via tensorboardx
+psutil==6.0.0
+    # via ipykernel
+ptyprocess==0.7.0
+    # via pexpect
+    # via terminado
+pure-eval==0.2.2
+    # via stack-data
 pyannote-audio==3.3.1
     # via kxagent
 pyannote-core==5.0.0
@@ -380,6 +521,8 @@ pydantic-core==2.18.4
 pydub==0.25.1
     # via gradio
 pygments==2.18.0
+    # via ipython
+    # via nbconvert
     # via rich
 pyopenjtalk-dict==0.3.4.dev2
     # via kxagent
@@ -388,10 +531,14 @@ pyparsing==3.1.2
 pypinyin==0.51.0
     # via kxagent
 python-dateutil==2.9.0.post0
+    # via arrow
+    # via jupyter-client
     # via matplotlib
     # via pandas
 python-dotenv==1.0.1
     # via uvicorn
+python-json-logger==2.0.7
+    # via jupyter-events
 python-multipart==0.0.9
     # via fastapi
     # via gradio
@@ -409,9 +556,13 @@ pyyaml==6.0.1
     # via gradio
     # via huggingface-hub
     # via hyperpyyaml
+<<<<<<< HEAD
     # via langchain
     # via langchain-community
     # via langchain-core
+=======
+    # via jupyter-events
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
     # via lightning
     # via omegaconf
     # via optuna
@@ -420,9 +571,14 @@ pyyaml==6.0.1
     # via pytorch-lightning
     # via transformers
     # via uvicorn
+pyzmq==26.0.3
+    # via ipykernel
+    # via jupyter-client
+    # via jupyter-server
 referencing==0.35.1
     # via jsonschema
     # via jsonschema-specifications
+    # via jupyter-events
 regex==2024.5.15
     # via nltk
     # via tiktoken
@@ -430,12 +586,22 @@ regex==2024.5.15
 requests==2.32.3
     # via datasets
     # via huggingface-hub
+<<<<<<< HEAD
     # via langchain
     # via langchain-community
     # via langsmith
+=======
+    # via jupyterlab-server
+>>>>>>> 97546ef (chore: Update dependencies and add JupyterLab to project)
     # via pooch
     # via tiktoken
     # via transformers
+rfc3339-validator==0.1.4
+    # via jsonschema
+    # via jupyter-events
+rfc3986-validator==0.1.1
+    # via jsonschema
+    # via jupyter-events
 rich==13.7.1
     # via pyannote-audio
     # via typer
@@ -466,17 +632,23 @@ semantic-version==2.10.0
     # via gradio
 semver==3.0.2
     # via pyannote-audio
+send2trash==1.8.3
+    # via jupyter-server
 sentencepiece==0.2.0
     # via speechbrain
 setuptools==70.1.0
     # via cn2an
     # via ctranslate2
+    # via jupyterlab
     # via lightning-utilities
 shellingham==1.5.4
     # via typer
 six==1.16.0
+    # via asttokens
+    # via bleach
     # via pyopenjtalk-dict
     # via python-dateutil
+    # via rfc3339-validator
 sniffio==1.3.1
     # via anyio
     # via httpx
@@ -485,6 +657,8 @@ sortedcontainers==2.4.0
 soundfile==0.12.1
     # via librosa
     # via pyannote-audio
+soupsieve==2.5
+    # via beautifulsoup4
 soxr==0.3.7
     # via librosa
 speechbrain==1.0.0
@@ -494,6 +668,8 @@ sqlalchemy==2.0.31
     # via langchain
     # via langchain-community
     # via optuna
+stack-data==0.6.3
+    # via ipython
 starlette==0.37.2
     # via fastapi
 sympy==1.12.1
@@ -508,11 +684,16 @@ tenacity==8.4.2
     # via langchain-core
 tensorboardx==2.6.2.2
     # via pyannote-audio
+terminado==0.18.1
+    # via jupyter-server
+    # via jupyter-server-terminals
 threadpoolctl==3.5.0
     # via scikit-learn
 tiktoken==0.7.0
     # via kxagent
     # via openai-whisper
+tinycss2==1.3.0
+    # via nbconvert
 tokenizers==0.19.1
     # via faster-whisper
     # via transformers
@@ -548,6 +729,12 @@ torchmetrics==1.4.0.post0
     # via lightning
     # via pyannote-audio
     # via pytorch-lightning
+tornado==6.4.1
+    # via ipykernel
+    # via jupyter-client
+    # via jupyter-server
+    # via jupyterlab
+    # via terminado
 tqdm==4.66.4
     # via datasets
     # via huggingface-hub
@@ -561,6 +748,19 @@ tqdm==4.66.4
     # via pytorch-metric-learning
     # via speechbrain
     # via transformers
+traitlets==5.14.3
+    # via comm
+    # via ipykernel
+    # via ipython
+    # via jupyter-client
+    # via jupyter-core
+    # via jupyter-events
+    # via jupyter-server
+    # via jupyterlab
+    # via matplotlib-inline
+    # via nbclient
+    # via nbconvert
+    # via nbformat
 transformers==4.41.2
     # via kxagent
 typeguard==4.3.0
@@ -569,6 +769,8 @@ typer==0.12.3
     # via fastapi-cli
     # via gradio
     # via pyannote-database
+types-python-dateutil==2.9.0.20240316
+    # via arrow
 typing-extensions==4.12.2
     # via alembic
     # via asteroid-filterbanks
@@ -596,6 +798,8 @@ tzdata==2024.1
     # via pandas
 ujson==5.10.0
     # via fastapi
+uri-template==1.3.0
+    # via jsonschema
 urllib3==2.2.2
     # via gradio
     # via requests
@@ -606,6 +810,15 @@ uvloop==0.19.0
     # via uvicorn
 watchfiles==0.22.0
     # via uvicorn
+wcwidth==0.2.13
+    # via prompt-toolkit
+webcolors==24.6.0
+    # via jsonschema
+webencodings==0.5.1
+    # via bleach
+    # via tinycss2
+websocket-client==1.8.0
+    # via jupyter-server
 websockets==11.0.3
     # via gradio-client
     # via uvicorn
